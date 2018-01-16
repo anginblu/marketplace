@@ -1,0 +1,10 @@
+<h2><%= @store.name %> for <%= @store.category.name %></h2>
+
+<h4>Products in this Store:</h4>
+<li><% @store.products.each do |product| %>
+  <a href="/products/<%=product.id%>"><%= product.name %></a>
+  <a href="/products/<%=@product.id%>/edit">Click to edit <%= product.name %></a>
+<% end%></li>
+
+<a href="/stores/<%=@store.id%>/edit">Click to edit your store, <%= @store.name %></a> <br />
+<a href="/stores/<%=@store.id%>/delete">Click to close your store, <%= @store.name %></a> <br />

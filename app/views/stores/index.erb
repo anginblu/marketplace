@@ -1,0 +1,6 @@
+<h2>List of all stores in this site</h2>
+<li>
+<% Store.all.each do |store| %>
+  <a href="/stores/<%=store.id%>"><%= store.name %></a> <br>
+<% end %>
+</li>
