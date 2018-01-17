@@ -1,4 +1,4 @@
-class StoreController < ApplicationController
+class ProductController < ApplicationController
 
   get "/stores" do
     redirect_if_not_logged_in
