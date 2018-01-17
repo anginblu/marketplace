@@ -1,6 +1,7 @@
 <p> Here are your stores, <%= @user.username %>
-<% @user.stores.each do |store| %>
-  <ul>
-    <li><a href="/stores/<%=store.id%>"><%= store.name %></a> with <%store.products.size%> products</li>
-  </ul>
+  
+<% if logged_in? && current_user == @user %>
+  <li><% @user.stores.each do |store| %>
+      <a href="/stores/<%=store.id%>"><%= store.name %></a> with <%store.products.size%> products
+  <% end %></li>
 <% end %>

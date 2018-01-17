@@ -17,25 +17,27 @@ class UsersController < ApplicationController
     if session[:user_id].nil?
       erb :'users/new'
     else
+      flash[:message] = "You are already logged in.  Please logout first."
       redirect to '/stores'
     end
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:password] == ""
-      redirect to '/signup'
+    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+    if user.save
+      session[:user_id] = user.id
+      redirect "/stores"
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
-      session[:user_id] = @user.id
-      redirect '/stores'
+      flash[:message] = "Signup failure: please retry!"
+      redirect "/signup"
     end
   end
 
   get '/login' do
-    @error_message = params[:error]
-    if !session[:user_id]
+    if session[:user_id].nil?
       erb :'users/login'
     else
+      flash[:message] = "You are already logged in.  Please log-out first."
       redirect '/stores'
     end
   end
@@ -46,16 +48,21 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/stores"
     else
-      redirect to '/signup'
+      flash[:message] = "Login failure. Please login again."
+      redirect '/users'
     end
   end
 
+  # get '/users' do
+  #   erb :'users/index'
+  # end
+
   get '/logout' do
-    if session[:user_id] != nil
-      session.destroy
-      redirect to '/login'
+    if session[:user_id].nil?
+      redirect '/'
     else
-      redirect to '/'
+      session[:user_id] = nil
+      redirect "/login"
     end
   end
 

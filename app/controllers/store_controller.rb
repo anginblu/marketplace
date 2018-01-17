@@ -12,8 +12,7 @@ class StoreController < ApplicationController
   end
 
   post "/stores" do
-    redirect_if_not_logged_in
-    Store.create(params)
+    Store.create(name: params[:store_name])
     redirect "/stores/#{@store.id}"
   end
 
