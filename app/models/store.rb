@@ -1,6 +1,7 @@
 class Store < ActiveRecord::Base
-  has_many :products
   belongs_to :user
+  has_many :storeproducts
+  has_many :products, through: :storeproducts
   validates_presence_of :name
 
 end
