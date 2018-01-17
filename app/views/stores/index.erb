@@ -2,9 +2,16 @@
   <%= flash[:message] %>
 <% end %>
 
-<h2>List of all stores in this site</h2>
-<li>
-<% Store.all.each do |store| %>
-  <a href="/stores/<%=store.id%>"><%= store.name %></a> <br>
-<% end %>
-</li>
+<h4>List of all stores in this site</h4>
+<ul>
+  <% Store.all.each do |store| %>
+    <li>
+    <a href="/stores/<%=store.id%>"><%= store.name %></a> <br>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+<% if logged_in?%>
+  <a href="/stores/new">Click to create a new store</a>
+<%end%>

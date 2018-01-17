@@ -1,7 +1,7 @@
-<h2>List of all products in this site</h2>
-<li>
+<br><h4>List of all products in this site</h4>
+
 <% @products.each do |product| %>
-  <a href="/products/<%=product.id%>"><%= product.name %></a>, $ <%= product.price %> <br>
-  available at <a href="/stores/<%=product.store.id%>"><%= product.store.name %></a>
+  <li>
+    <a href="/products/<%=product.id%>"><%= product.name %></a>, $ <%= product.price %>, available at <a href="/stores/<%=product.store.id%>"><%= product.store.name %></a>
+  </li>
 <% end %>
-</li>

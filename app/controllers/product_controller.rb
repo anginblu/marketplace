@@ -1,39 +1,49 @@
 class ProductController < ApplicationController
 
-  get "/stores" do
+  get "/products" do
     redirect_if_not_logged_in
-    @stores = Store.all
-    erb :'stores/index'
+    @products = Product.all
+    erb :'products/index'
   end
 
-  get "/stores/new" do
-    redirect_if_not_logged_in
-    erb :'stores/new'
+  post "/products/new" do
+    @store = Store.find_by(name: params[:store])
+    erb :'products/new'
   end
 
-  post "/stores" do
-    @store = Store.create(name: params[:store_name])
-    @store.update(user_id: current_user)
-    redirect "/stores/#{@store.id}"
+  get "/products/new" do
+    redirect_if_not_logged_in
+    erb :'products/new'
   end
 
-  get "/stores/:id/edit" do
-    redirect_if_not_logged_in
-    @store = Store.find(params[:id])
-    erb :'stores/edit'
+  post "/products" do
+    @product = Product.create(name: params[:product_name], price: params[:price], store_id: params[:store_id])
+    redirect "/products/#{@product.id}"
   end
 
-  post "/stores/:id" do
+  get "/products/:id/edit" do
     redirect_if_not_logged_in
-    @store = Store.find(params[:id])
-    @store.update(params[:name])
-    redirect "/stores/#{@store.id}"
+    @product = Product.find(params[:id])
+    erb :'products/edit'
   end
 
-  get "/stores/:id" do
+  post "/products/:id" do
     redirect_if_not_logged_in
-    @store = Store.find(params[:id])
-    erb :'stores/show'
+    @product = Product.find(params[:id])
+    unless params[:name].empty?
+      @product.update(name: params[:name])
+    end
+    unless params[:price].empty?
+      @product.update(price: params[:price])
+    end
+    @product.update(store_id: params[:store_id])
+    redirect "/products/#{@product.id}"
+  end
+
+  get "/products/:id" do
+    redirect_if_not_logged_in
+    @product = Product.find(params[:id])
+    erb :'products/show'
   end
 
 end

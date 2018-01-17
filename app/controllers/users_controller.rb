@@ -58,9 +58,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # get '/users' do
-  #   erb :'users/index'
-  # end
+  get '/users' do
+    erb :'users/index'
+  end
 
   get '/logout' do
     if session[:user_id].nil?
