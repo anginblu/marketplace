@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117214413) do
+ActiveRecord::Schema.define(version: 20180117220503) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
   end
 
-  create_table "storeproducts", force: :cascade do |t|
+  create_table "store_products", force: :cascade do |t|
     t.string "name"
     t.integer "store_id"
     t.integer "product_id"
-    t.index ["product_id"], name: "index_storeproducts_on_product_id"
-    t.index ["store_id"], name: "index_storeproducts_on_store_id"
+    t.index ["product_id"], name: "index_store_products_on_product_id"
+    t.index ["store_id"], name: "index_store_products_on_store_id"
   end
 
   create_table "stores", force: :cascade do |t|

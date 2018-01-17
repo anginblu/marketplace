@@ -1,6 +1,6 @@
-class CreateStoreproducts < ActiveRecord::Migration[5.1]
+class CreateStoreProducts < ActiveRecord::Migration[5.1]
   def change
-    create_table :storeproducts do |t|
+    create_table :store_products do |t|
       t.string :name
       t.belongs_to :store
       t.belongs_to :product
