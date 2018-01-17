@@ -1,11 +1,12 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Edit <%= @store.name %></h1>
 
+<h3>
 <form action="/stores/<%=@store.id %>" method="POST">
-  <label> Edit Store Name </label>
-    <input type="text" name="name" value="<%=@store.name %>"> </br>
-
-  <label> Edit Store Category </label>
-    <input type="text" name="category" value="<%=@store.category%>"> </br>
-
-  <input type="submit" value="Update">
+    <input type="text" name="name" value="<%=@store.name %>" placeholder="New Name:">
+    <button type="submit" value="Update">
 </form>
+</h3>

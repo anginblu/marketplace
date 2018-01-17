@@ -6,19 +6,20 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "golfclubsaregreat"
+    set :session_secret, "my_application_secret"
+    use Rack::Flash
   end
 
 
-  get '/' do 
+  get '/' do
     erb :index
-    #welcome to fwitter!!! 
   end
 
   helpers do
     def redirect_if_not_logged_in
       if !logged_in?
-        redirect "/login?error=You have to be logged in to do that"
+        flash[:message] = "Please login & retry!"
+        redirect "/login"
       end
     end
 

@@ -1,4 +1,7 @@
 <h2><%= @product.name %>, $ <%= @product.price %></h2>
+<h3>available at <%= @product.store %></h3>
 
-<a href="/products/<%=@product.id%>/edit">Edit this product</a><br>
-<a href="/products/<%=@product.id%>/delete">Delete this product</a>
+<% if logged_in? && current_user == @product.store.user %>
+  <a href="/products/<%=@product.id%>/edit">Edit this product</a><br>
+  <a href="/products/<%=@product.id%>/delete">Delete this product</a>
+<% end %>
